@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDnsImgStore } from './dnsImgStore';
 
 function App() {
-  const { domain, setDomain, fetchChunks, imageBase64, chunksDone, chunkCount, loading, error } = useDnsImgStore();
+  const { domain, setDomain, fetchChunks, imageBase64, chunksDone, chunkCount, loading, error, chunks } = useDnsImgStore();
   const [input, setInput] = React.useState('');
 
   const handleInputChange = (e) => {
@@ -16,6 +16,8 @@ function App() {
 
 
   return (
+    <>
+    <div>
     <div className="bg-primary h-screen flex flex-col items-center justify-center text-secondary font-rubik">
       <span className="text-2xl text-[#ffffff] font-bold font-rubik">dnsimg</span>
       <div className="flex flex-row gap-2 items-center justify-center mb-4 mt-4">
@@ -28,7 +30,7 @@ function App() {
         </div>
       )}
       <div className="flex flex-col items-center justify-center">
-        {imageBase64 && <img src={`data:image/png;base64,${imageBase64}`} alt="DnsImg" />}
+        {imageBase64 && <img src={`data:image/png;base64,${imageBase64}`} width={400} height={400} alt="DnsImg" />}
         {loading && (
           <div>
           <div className="flex flex-col items-center justify-center">
@@ -36,9 +38,13 @@ function App() {
           </div>
           <div className="flex gap-1 mt-2">
             {Array.from({length: chunkCount}).map((_, i) => (
+              
               <div 
                 key={i}
-                className={`w-2 h-8 rounded ${i < chunksDone ? 'bg-green-500' : 'bg-red-500'}`}
+                className={`w-2 h-8 rounded ${chunks[i] ? 'bg-green-500' : 'bg-red-500'}`}
+                onClick={() => {
+                  console.log(chunks[i])
+                }}
               />
             ))}
             </div>
@@ -50,6 +56,8 @@ function App() {
         
       </div>
     </div>
+    </div>
+    </>
   )
 }
 

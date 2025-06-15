@@ -9,7 +9,9 @@ for i in range(total):
     print(f"Chunk #{i+1}, size: {len(chunk)}")
     chunks.append(chunk)
 
-with open("asherfalcon.com.txt", "a") as dns:
+domain = "asherfalcon.com"
+
+with open(f"{domain}.txt", "a") as dns:
     for chunkIndex in range(len(chunks)):
-        dns.write(f"dnsimg-{chunkIndex+1}.asherfalcon.com.	60	IN	TXT	\"{chunks[chunkIndex]}\"\n")
-    dns.write(f"dnsimg-count.asherfalcon.com.	60	IN	TXT	\"{len(chunks)}\"\n")
+        dns.write(f"dnsimg-{chunkIndex+1}.{domain}.	60	IN	TXT	\"{chunks[chunkIndex]}\"\n")
+    dns.write(f"dnsimg-count.{domain}.	60	IN	TXT	\"{len(chunks)}\"\n")

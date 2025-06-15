@@ -14,7 +14,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # Replace with your domain
-domain = "asherfalcon.com"
+domain = "containerback.com"
 
 # Run the dig command
 result = subprocess.run(
